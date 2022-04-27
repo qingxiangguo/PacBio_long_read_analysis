@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<smrtpipeSettings>
+  <module name="P_Fetch"/>
+  <module name="P_Filter">
+       <param name="minSubReadLength" label="Minimum Subread Length">
+       <value>100</value>
+       </param>
+      <param name="readScore" label="Minimum Polymerase Read Quality">
+      <value>0.75</value>
+      </param>
+      <param name="minLength" label="Minimum Polymerase Read Length">
+      <value>200</value>
+      </param>
+  </module>
+<module id="P_FilterReports" editableInJob="false"/>
+</smrtpipeSettings>
+~

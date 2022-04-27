@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<smrtpipeSettings>
+ <protocol>
+  <param name="reference"><value>/backup01/qingxiangguo/transcriptome/02isoseq/ref/test</value></param>
+ </protocol>
+ <module id="P_Fetch" />
+
+ <module label="Reads Of Insert" id="P_CCS" editableInJob="true" >
+    <description>Generates consensus sequences from single molecules.</description>
+    <!-- This *must* be false in Mapping to disable to the standard P_Mapping align task
+    <param name="align" hidden="true"><value>False</value></param>
+    <param name="alignCCS" hidden="true"><value>True</value></param>
+    -->
+    <param name='minFullPasses' label="Minimum Full Passes">
+      <title>Minimum number of full-length passes over the insert DNA for the read to be emitted</title>
+      <value>2</value>
+      <input type="text"/>
+      <rule type="digits" min="0" max="10" message="Value must be an integer between 0 and 10" />
+    </param>
+    <param name='minPredictedAccuracy' label="Minimum Predicted Accuracy">
+      <title>Minimum predicted accuracy of the reads of insert emitted (in percent)</title>
+      <value>90</value>
+      <input type="text"/>
+      <rule type="digits" min="70" max="100" message="Value must be between 70 and 100" />
+    </param>
+  </module>
+
+ <module name="P_IsoSeqClassify">
+  <param name="minSeqLen"><value>200 </value></param>
+  <param name="ignorePolyA" hidden="False"><value>False</value></param>
+  <param name="gmap_n"><value>100</value></param>
+  <param name="flnctocmph5"><value>False</value></param>
+ </module>
+ <module name="P_IsoSeqCluster">
+  <param name="cluster" hidden="False"><value>True</value></param>
+"rs_isoseq.xml"

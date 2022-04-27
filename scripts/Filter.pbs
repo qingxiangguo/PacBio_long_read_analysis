@@ -1,0 +1,8 @@
+#PBS -N filter
+#PBS -l nodes=1:ppn=10     
+#PBS -q cu 
+#PBS -S /bin/bash
+cd /backup01/qingxiangguo/DX/DX_genome/Filter
+source /lustre/Work/qingxiangguo/dev/sofs/SMRT/smrtanalysis_v2_path3/current/etc/setup.sh
+fofnToSmrtpipeInput.py input.fofn > input.xml
+smrtpipe.py --params=filter.xml xml:input.xml

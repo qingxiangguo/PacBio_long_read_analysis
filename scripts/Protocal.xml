@@ -1,0 +1,8 @@
+<jellyProtocol>
+    <reference>/backup01/aipeng/genome/06PBJelly/ref/lambda.fasta</reference>
+    <outputDir>/backup01/aipeng/genome/06PBJelly/</outputDir>
+    <blasr>-minMatch 8 -minPctIdentity 70 -bestn 1 -nCandidates 20 -maxScore -500 -nproc 4 -noSplitSubreads</blasr>
+    <input baseDir="/backup01/01data/05PBJelly/">
+        <job>filtered_subreads.fastq</job>
+    </input>
+</jellyProtocol>

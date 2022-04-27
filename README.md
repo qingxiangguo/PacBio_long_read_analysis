@@ -20,115 +20,9 @@ Written by Qingxiang Guo, qingxiang.guo@outlook.com, distributed without any gua
 
 /Work/data/Analysis\_Results/m150730\_090551\_42199\_c100821272550000001823174411031557\_s1\_p0.3.bax.h5
 
-\# The content of Filter.xml is as follows:
-
-<?xml version="1.0" ?>
-
-<smrtpipeSettings>
-
-`  `<module name="P\_Fetch"/>
-
-`  `<module name="P\_Filter">
-
-`       `<param name="minSubReadLength" label="Minimum Subread Length">
-
-`       `<value>100</value>
-
-`       `</param>
-
-`      `<param name="readScore" label="Minimum Polymerase Read Quality">
-
-`      `<value>0.75</value>
-
-`      `</param>
-
-`      `<param name="minLength" label="Minimum Polymerase Read Length">
-
-`      `<value>200</value>
-
-`      `</param>
-
-`  `</module>
-
-<module id="P\_FilterReports" editableInJob="false"/>
-
-</smrtpipeSettings>
-
-~
-
 \# Start analysis, do Filter.sh
 
 \# To find isoseq, run flnc.sh
-
-\# The content of the configuration file rs\_isoseq.xml is as follows:
-
-<?xml version="1.0" encoding="utf-8"?>
-
-<smrtpipeSettings>
-
-` `<protocol>
-
-`  `<param name="reference"><value>/backup01/qingxiangguo/transcriptome/02isoseq/ref/test</value></param>
-
-` `</protocol>
-
-` `<module id="P\_Fetch" />
-
-` `<module label="Reads Of Insert" id="P\_CCS" editableInJob="true" >
-
-`    `<description>Generates consensus sequences from single molecules.</description>
-
-`    `<!-- This \*must\* be false in Mapping to disable to the standard P\_Mapping align task
-
-`    `<param name="align" hidden="true"><value>False</value></param>
-
-`    `<param name="alignCCS" hidden="true"><value>True</value></param>
-
-`    `-->
-
-`    `<param name='minFullPasses' label="Minimum Full Passes">
-
-`      `<title>Minimum number of full-length passes over the insert DNA for the read to be emitted</title>
-
-`      `<value>2</value>
-
-`      `<input type="text"/>
-
-`      `<rule type="digits" min="0" max="10" message="Value must be an integer between 0 and 10" />
-
-`    `</param>
-
-`    `<param name='minPredictedAccuracy' label="Minimum Predicted Accuracy">
-
-`      `<title>Minimum predicted accuracy of the reads of insert emitted (in percent)</title>
-
-`      `<value>90</value>
-
-`      `<input type="text"/>
-
-`      `<rule type="digits" min="70" max="100" message="Value must be between 70 and 100" />
-
-`    `</param>
-
-`  `</module>
-
-` `<module name="P\_IsoSeqClassify">
-
-`  `<param name="minSeqLen"><value>200 </value></param>
-
-`  `<param name="ignorePolyA" hidden="False"><value>False</value></param>
-
-`  `<param name="gmap\_n"><value>100</value></param>
-
-`  `<param name="flnctocmph5"><value>False</value></param>
-
-` `</module>
-
-` `<module name="P\_IsoSeqCluster">
-
-`  `<param name="cluster" hidden="False"><value>True</value></param>
-
-"rs\_isoseq.xml"
 
 **2. Map the long-read iso-seq to the reference genome using Gmap**
 
@@ -171,40 +65,6 @@ perl filter.pl -i /backup01/qingxiangguo/HGAP/MCB/input.fofn -d /backup01/AS\_HG
 /lustre/Work/data/HBE/F06\_1/Analysis\_Results/m150514\_172003\_42199\_c100795172550000001823166309091575\_s1\_p0.3.bax.h5
 
 \# Run Filter.pbs
-
-\# The content of filter.xml is as follows:
-
-<?xml version="1.0" ?>
-
-<smrtpipeSettings>
-
-`  `<module name="P\_Fetch"/>
-
-`  `<module name="P\_Filter">
-
-`       `<param name="minSubReadLength" label="Minimum Subread Length">
-
-`       `<value>500</value>
-
-`       `</param>
-
-`      `<param name="readScore" label="Minimum Polymerase Read Quality">
-
-`      `<value>0.75</value>
-
-`      `</param>
-
-`      `<param name="minLength" label="Minimum Polymerase Read Length">
-
-`      `<value>100</value>
-
-`      `</param>
-
-`  `</module>
-
-<module id="P\_FilterReports" editableInJob="false"/>
-
-</smrtpipeSettings>
 
 \# We have already obtained the subreads, next we calculated the distribution of seed length to screen the candidate seeds
 
@@ -368,23 +228,7 @@ Jelly.py assembly Protocol.xml
 
 Jelly.py output Protocol.xml
 
-\# The content of configuration file Protocal.xml is as follows:
 
-<jellyProtocol>
-
-`    `<reference>/backup01/aipeng/genome/06PBJelly/ref/lambda.fasta</reference>
-
-`    `<outputDir>/backup01/aipeng/genome/06PBJelly/</outputDir>
-
-`    `<blasr>-minMatch 8 -minPctIdentity 70 -bestn 1 -nCandidates 20 -maxScore -500 -nproc 4 -noSplitSubreads</blasr>
-
-`    `<input baseDir="/backup01/01data/05PBJelly/">
-
-`        `<job>filtered\_subreads.fastq</job>
-
-`    `</input>
-
-</jellyProtocol>
 
 **License**
 
